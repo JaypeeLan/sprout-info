@@ -1,0 +1,35 @@
+services:
+  # Backend — Node.js web service 
+  - type: web
+    name: task-tracker-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: task-tracker-db
+          property: connectionString
+      # Set this after deploying the frontend to lock down CORS:
+      # - key: FRONTEND_URL
+      #   value: https://task-tracker-ui.onrender.com
+
+  # Frontend — Static site
+  - type: web
+    name: task-tracker-ui
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      # Set this to your backend Render URL after deploying the API:
+      - key: REACT_APP_API_URL
+        value: https://task-tracker-api.onrender.com/tasks
+
+databases:
+  - name: task-tracker-db
+    databaseName: task_tracker
+    user: task_tracker_user

@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment — never commit real credentials
+.env
+**/.env
+
+# React production build
+frontend/build/
+
+# macOS / Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+deployment.md
