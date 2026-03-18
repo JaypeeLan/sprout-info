@@ -13,9 +13,9 @@ services:
         fromDatabase:
           name: task-tracker-db
           property: connectionString
-      # Set this after deploying the frontend to lock down CORS:
-      # - key: FRONTEND_URL
-      #   value: https://task-tracker-ui.onrender.com
+      # Lock down CORS to only the frontend URL:
+      - key: FRONTEND_URL
+        value: https://sprout-info-1.onrender.com
 
   # Frontend — Static site
   - type: web
@@ -25,9 +25,9 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: build
     envVars:
-      # Set this to your backend Render URL after deploying the API:
+      # Use the actual backend Render URL:
       - key: REACT_APP_API_URL
-        value: https://task-tracker-api.onrender.com/tasks
+        value: https://sprout-info.onrender.com/tasks
 
 databases:
   - name: task-tracker-db
